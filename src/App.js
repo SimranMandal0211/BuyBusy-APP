@@ -1,6 +1,7 @@
 import './App.css';
 import Navbar from './components/Navbar';
 import Signin from './pages/Signin';
+import Signup from './pages/Signup';
 import Home from './pages/Home';
 
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
@@ -14,7 +15,11 @@ function App() {
         {index: true, element: <Home />},
         { path: 'signin',
           element: <Signin />,
-        }
+        },
+        {
+          path: 'signup',
+          element: <Signup />
+        },
       ]
     }
   ])
