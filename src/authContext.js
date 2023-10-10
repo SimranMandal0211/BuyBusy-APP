@@ -4,6 +4,10 @@ import { useState , useEffect, createContext, useContext, } from "react";
 import {db} from './firebaseInit';
 import { collection, addDoc, onSnapshot } from "firebase/firestore";
 
+// toast notification
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 // 1. create context
 const authContext = createContext();
@@ -45,6 +49,7 @@ function CustomAuthContext({children}){
 
         // if found email display notification
         if(index !== -1){
+            toast.error("Email Address already exist, Try Again or SignIn Instead!!!");
             return;
         }
 
@@ -54,6 +59,7 @@ function CustomAuthContext({children}){
             email: data.email,
             password: data.password,
         });
+        toast.success("New user Created, Please LogIn to Continue !!");
     }
 
     // signin user
@@ -63,10 +69,12 @@ function CustomAuthContext({children}){
 
         // if user not found show notification
         if(index === -1){
+            toast.error("Email does not exist, Try again or SignUp Instead!!!");
             return false;
         }
 
         if(userList[index].password === data.password){
+            toast.success("Sign In Successfully!!!");
             setLoggedIn(true);
             setUserLoggedIn(userList[index]);
 
@@ -76,6 +84,7 @@ function CustomAuthContext({children}){
 
             return true;
         }else{
+            toast.error("Wrong UserName/Password, Try Again");
             return false;
         }
     }
@@ -89,6 +98,7 @@ function CustomAuthContext({children}){
         // set logging status false
         setLoggedIn(false);
         setUserLoggedIn(null);
+        toast.success("Sign Out Successfully!!!!");
     }
 
 
@@ -104,6 +114,7 @@ function CustomAuthContext({children}){
              setUserLoggedIn
             }
         }>
+            <ToastContainer />
             {children}
         </authContext.Provider>
     );
