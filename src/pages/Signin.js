@@ -12,7 +12,6 @@ function Signin(){
             email: emailRef.current.value,
             password: passwordref.current.value
         }
-
         console.log('input signIn data: ', data);
     }
 

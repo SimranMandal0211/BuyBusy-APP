@@ -1,10 +1,24 @@
 import {useRef} from 'react';
+// css style
 import '../styles/signInUp.css';
+
+// navigation router
+import { useNavigate } from "react-router-dom";
+
+// custom context hook (authentication)
+import { useAuthValue } from '../authContext';
 
 function Signup(){
     const nameRef = useRef();
     const emailRef = useRef();
     const passwordRef = useRef();
+
+    // navigation variable
+    const navigate = useNavigate();
+
+    // for creating new user
+    const { createUser } = useAuthValue();
+
 
     function handleSubmit(e){
         e.preventDefault();
@@ -16,6 +30,10 @@ function Signup(){
         }
 
         console.log('signUp data', data);
+        // creating user
+        createUser(data);
+        // if user created redirect to corresponding page
+        navigate("/signin");
     }
 
     return(
@@ -48,7 +66,7 @@ function Signup(){
                 </form>
             </div>
         </div>
-    )
+    );
 }
 
 export default Signup;
