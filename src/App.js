@@ -4,6 +4,8 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 
+import CustomAuthContext from './authContext';
+
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
 function App() {
@@ -24,7 +26,9 @@ function App() {
     }
   ])
   return (
-    <RouterProvider router={browserRouter}/>
+    <CustomAuthContext>
+      <RouterProvider router={browserRouter}/>
+    </CustomAuthContext>
   );
 }
 

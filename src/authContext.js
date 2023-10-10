@@ -19,6 +19,8 @@ function CustomAuthContext({children}){
     const [userList, setUserList] = useState([]);
     // login user status
     const [isLoggedIn, setLoggedIn] = useState(false);
+    // user who is logged in
+    const [userLoggedIn, setUserLoggedIn] = useState(null);
 
     // getting all the users from database 
     useEffect(() => {
@@ -54,11 +56,57 @@ function CustomAuthContext({children}){
         });
     }
 
+    // signin user
+    async function signIn(data){
+        // finding user in database
+        const index = userList.findIndex((user) => user.email === data.email);
+
+        // if user not found show notification
+        if(index === -1){
+            return false;
+        }
+
+        if(userList[index].password === data.password){
+            setLoggedIn(true);
+            setUserLoggedIn(userList[index]);
+
+            // generating user's login token and store user's data
+            window.localStorage.setItem('token', true);
+            window.localStorage.setItem('index', JSON.stringify(userList[index]));
+
+            return true;
+        }else{
+            return false;
+        }
+    }
+
+    // signout 
+    function signOut(){
+        // removing user's data and token local storage
+        window.localStorage.removeItem('token');
+        window.localStorage.removeItem('index');
+
+        // set logging status false
+        setLoggedIn(false);
+        setUserLoggedIn(null);
+    }
+
+
     return(
-        <authContext.Provider value={ createUser }>
+        <authContext.Provider value={ 
+            {createUser,
+             signIn,
+             signOut,
+
+             isLoggedIn,
+             setLoggedIn,
+             userLoggedIn,
+             setUserLoggedIn
+            }
+        }>
             {children}
         </authContext.Provider>
-    )
+    );
 }
 
 

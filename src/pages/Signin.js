@@ -1,18 +1,27 @@
 import {useRef} from 'react';
-import {Link} from 'react-router-dom';
+import {Link, useNavigate} from 'react-router-dom';
 import '../styles/signInUp.css';
 
+import { useAuthValue } from '../authContext';
+
 function Signin(){
+    const { signIn } = useAuthValue();
+
+    const navigate = useNavigate();
+
     const emailRef = useRef();
     const passwordref = useRef();
 
-    function handleSubmit(e){
+    async function handleSubmit(e){
         e.preventDefault();
         const data = {
             email: emailRef.current.value,
             password: passwordref.current.value
         }
         console.log('input signIn data: ', data);
+        // sign in user
+        const status = await signIn(data);
+        { status ? navigate('/') : navigate('/signin') };
     }
 
     return(
@@ -40,7 +49,7 @@ function Signin(){
                 <Link to='/signup'><span>or Create New Account</span></Link>
             </div>
         </div>
-    )
+    );
 }
 
 export default Signin;
