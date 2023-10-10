@@ -58,6 +58,7 @@ function CustomAuthContext({children}){
             name: data.name,
             email: data.email,
             password: data.password,
+            cart: [],
         });
         toast.success("New user Created, Please LogIn to Continue !!");
     }
