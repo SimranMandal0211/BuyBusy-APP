@@ -1,4 +1,6 @@
 import '../styles/Navbar.css';
+
+import cartIcon from '../assets/images/cart.png';
 import homeIcon from '../assets/images/homeIcon.png';
 import signInIcon from '../assets/images/signInIcon.png';
 import signOutIcon from '../assets/images/signOut.png';
@@ -24,6 +26,12 @@ function Navbar(){
                     </span>
                 </Link>
                 
+                {isLoggedIn && <NavLink to='/cart'>
+                    <span>
+                        <img src={cartIcon} alt='cart' width='40' height='40' /> Cart
+                    </span>
+                </NavLink>}
+
                 <NavLink to={!isLoggedIn ? '/signin' : '/'}>
                     <span>
                     {!isLoggedIn ? 
