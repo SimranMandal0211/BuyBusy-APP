@@ -3,6 +3,14 @@ import { data } from './assets/data';
 import { createContext, useContext, useState } from 'react';
 import { useAuthValue } from './authContext';
 
+
+// toast notification
+import 'react-toastify/dist/ReactToastify.css';
+import { toast } from "react-toastify";
+
+
+
+
 // creating context
 export const productContext = createContext();
 
@@ -24,17 +32,20 @@ export default function CustomProductContext({ children }){
     function addToCart(product){
         // check whether iser is logged in or not
         if(!isLoggedIn){
+            toast.error("Please first Login !!!");
             return;
         }
 
         const index = cart.findIndex((item) => item.name === product.name);
 
         if(index !== -1){
+            toast.success("Product Quantity Increased!!");
             return;
         }
 
         setItemInCart(itemInCart + 1);
         console.log('Item added to cart:: ',itemInCart);
+        toast.success("Added to your Cart!!")
     }
 
     return(
