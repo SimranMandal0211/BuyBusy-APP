@@ -1,5 +1,6 @@
 import {useRef} from 'react';
 import {Link} from 'react-router-dom';
+import '../styles/signInUp.css';
 
 function Signin(){
     const emailRef = useRef();
@@ -16,25 +17,28 @@ function Signin(){
     }
 
     return(
-        <div className='signIn-container'>
-            <div className='signIn-form-container'>
+        <div className='sign-container'>
+            <div className='sign-form-container'>
                 <h1>Sign In</h1>
                 <form onSubmit={handleSubmit}>
                     <input type="email"
                         required
                         placeholder="Enter Email"
                         ref={emailRef}
+                        className='input-field'
                     />
                     <br />
                     <input type="password"
                         required
                         placeholder="Enter Password"
                         ref={passwordref}
+                        className='input-field'
                     />
-                    <button>Submit</button>
+                    <br />
+                    <button className='input-field'>Submit</button>
                 </form>
                 <br />
-                <Link to='/signup'>or Create New Account</Link>
+                <Link to='/signup'><span>or Create New Account</span></Link>
             </div>
         </div>
     )

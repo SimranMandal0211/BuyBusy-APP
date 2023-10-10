@@ -1,4 +1,5 @@
 import {useRef} from 'react';
+import '../styles/signInUp.css';
 
 function Signup(){
     const nameRef = useRef();
@@ -18,29 +19,34 @@ function Signup(){
     }
 
     return(
-        <div>
-            <h1>Sign Up</h1>
-            <form onSubmit={handleSubmit}>
-                <input type='text'
-                    required
-                    placeholder='Enter Name'
-                    ref={nameRef}
-                />
-                <br />
-                <input type='email'
-                    required
-                    placeholder='Enter Email'
-                    ref={emailRef}
-                />
-                <br />
-                <input type='password'
-                    required
-                    placeholder='Enter Password'
-                    ref={passwordRef}
-                />
-                <br />
-                <button>Submit</button>
-            </form>
+        <div className='sign-container'>
+            <div className='sign-form-container'>
+                <h1>Sign Up</h1>
+                <form onSubmit={handleSubmit}>
+                    <input type='text'
+                        required
+                        placeholder='Enter Name'
+                        ref={nameRef} 
+                        className='input-field'
+                    />
+                    <br />
+                    <input type='email'
+                        required
+                        placeholder='Enter Email'
+                        ref={emailRef} 
+                        className='input-field'
+                    />
+                    <br />
+                    <input type='password'
+                        required
+                        placeholder='Enter Password'
+                        ref={passwordRef} 
+                        className='input-field'
+                    />
+                    <br />
+                    <button className='input-field'>Submit</button>
+                </form>
+            </div>
         </div>
     )
 }
