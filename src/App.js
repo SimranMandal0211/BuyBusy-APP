@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 
 import CustomAuthContext from './authContext';
+import CustomProductContext from './productContext';
 
 import {createBrowserRouter, RouterProvider} from 'react-router-dom';
 
@@ -27,7 +28,9 @@ function App() {
   ])
   return (
     <CustomAuthContext>
-      <RouterProvider router={browserRouter}/>
+      <CustomProductContext>
+        <RouterProvider router={browserRouter}/>
+      </CustomProductContext>
     </CustomAuthContext>
   );
 }

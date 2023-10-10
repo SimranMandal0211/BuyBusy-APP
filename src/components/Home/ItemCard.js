@@ -1,17 +1,19 @@
 import styles from '../../styles/home.module.css';
 
-function MainContent(){
+function ItemCard(props){
+    const {name, image, price, category} = props.item;
+
     return(
        <div className={styles.cardContainer}>
             <div className={styles.imgBox}>
-                <img src='https://3.bp.blogspot.com/-WSxpb-jWNFQ/UTHBTiDE2yI/AAAAAAAAA9g/KGNwUll7uOc/s1600/latest+dresses7.jpg' alt='product-Image' 
+                <img src={image} alt={category} 
                     className={styles.productImg}
                 />
             </div>
 
             <div className={styles.itemDetailBox}>
-                <p>Floral Multicolor Organza Dress </p>
-                <p>Rs. 500</p>
+                <p>{name}</p>
+                <p>Rs. {price}</p>
             </div>
 
             <button>Add To Cart</button>
@@ -19,4 +21,4 @@ function MainContent(){
     )
 }
 
-export default MainContent;
+export default ItemCard;
