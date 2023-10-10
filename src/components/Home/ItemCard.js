@@ -10,7 +10,7 @@ function MainContent(){
             </div>
 
             <div className={styles.itemDetailBox}>
-                <p>Floral Multicolor Organza Dress</p>
+                <p>Floral Multicolor Organza Dress </p>
                 <p>Rs. 500</p>
             </div>
 
