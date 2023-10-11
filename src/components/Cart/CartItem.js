@@ -2,9 +2,11 @@ import minusIcon from '../../assets/images/remove.png';
 import plusIcon from '../../assets/images/add.png';
 
 import styles from '../../styles/cart.module.css';
+import { useProductContext } from '../../productContext';
 
 export default function CartItem(props){
     const {name, image, price, category, quantity} = props.product;
+    const {removeFromCart, increaseQty, decreaseQty} = useProductContext();
 
     return(
         <div className={styles.cartItem}>
@@ -13,9 +15,9 @@ export default function CartItem(props){
                     <img src={image} alt={category} />
                 </div>
                 <div className={styles.qtyBtns}>
-                    <span><img src={minusIcon} alt='-' /></span>
+                    <span onClick={() => decreaseQty(props.product)}><img src={minusIcon} alt='-' /></span>
                     <span>{quantity}</span>
-                    <span><img src={plusIcon} alt='+' /></span>
+                    <span onClick={() => increaseQty(props.product)}><img src={plusIcon} alt='+' /></span>
                 </div>
             </div>
 
@@ -23,7 +25,7 @@ export default function CartItem(props){
                 <p>{name}</p>
                 <p>Rs. {price}</p>
 
-                <button>Remove From Cart</button>
+                <button onClick={() => removeFromCart(props.product)}>Remove From Cart</button>
             </div>
 
         </div>

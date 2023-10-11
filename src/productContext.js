@@ -10,7 +10,7 @@ import { toast } from "react-toastify";
 
 // database
 import {db} from './firebaseInit';
-import {doc, updateDoc, onSnapshot, arrayUnion } from 'firebase/firestore';
+import {doc, updateDoc, onSnapshot, arrayUnion, arrayRemove } from 'firebase/firestore';
 
 
 // creating context
@@ -68,6 +68,7 @@ export default function CustomProductContext({ children }){
         const index = cart.findIndex((item) => item.name === product.name);
 
         if(index !== -1){
+            increaseQty(cart[index]);
             toast.success("Product Quantity Increased!!");
             return;
         }
@@ -83,11 +84,68 @@ export default function CustomProductContext({ children }){
         toast.success("Added to your Cart!!")
     }
 
+    // remove single product from cart
+    async function removeFromCart(product){
+        const userRef = doc(db, 'buybusy', userLoggedIn.id);
+        await updateDoc(userRef, {
+            cart: arrayRemove(product)
+        });
+        setTotal(Number(total - (product.quantity * product.price)));
+        setItemInCart(itemInCart - product.quantity);
+        toast.success('Removed from Cart!!');
+    }
+
+
+    // to increase item's quentity
+    async function increaseQty(product){
+        const index = cart.findIndex((item) => item.name === product.name);
+        cart[index].quantity++;
+        setCart(cart);
+
+        // update cart in firebase databse
+        const userRef = doc(db, 'buybusy', userLoggedIn.id);
+        await updateDoc(userRef, {
+            cart: cart
+        });
+
+        setItemInCart(itemInCart + 1);
+        setTotal(Number(total + cart[index].price));
+    }
+
+    // to decrease item's quantity
+    async function decreaseQty(product){
+        const index = cart.findIndex((item) => item.name === product.name);
+        setTotal(Number(total - cart[index].price));
+
+        // change qty of product and update cart array
+        if(cart[index].quantity > 1){
+            cart[index].quantity--;
+        }else{
+            cart.splice(index, 1);
+        }
+
+
+        // update cart and item Count
+        setCart(cart);
+        setItemInCart(itemInCart - 1);
+
+        // update cart in array
+        const userRef = doc(db, 'buybusy', userLoggedIn.id);
+        await updateDoc(userRef, {
+            cart: cart
+        });
+    }
+
+
     return(
         <productContext.Provider value={
-            {data,
-             addToCart,
-             cart,
+            {data,          //MainContent
+             addToCart,     //use in ItemCart component
+             cart,          //Cart component
+
+             removeFromCart,    //CartItem component
+             increaseQty,
+             decreaseQty
             }
         }>
             {children}
