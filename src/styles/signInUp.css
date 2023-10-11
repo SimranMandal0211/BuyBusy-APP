@@ -27,13 +27,13 @@
     border-radius: 1rem;
     outline: none;
     margin: .5rem 1rem .5rem 0;
+    padding: 0.5rem;
+    width: 60%;
 }
 
 .sign-form-container input{
     border: 2px solid #a4a4a4;
     color: black;
-    width: 60%;
-    padding: 0.5rem;
     padding-left: 1rem;
 }
 
@@ -41,8 +41,6 @@
     font-weight: bold;
     background: #095af0;
     border: none;
-    width: 65%;
     color: white;
-    padding: 0.5rem;
 }
 

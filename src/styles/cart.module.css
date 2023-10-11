@@ -49,9 +49,14 @@
     font-weight: bold;
     font-size: 1.1rem;
     color: white;
-    background: #3081d7;
+    background: rgb(7, 93, 192);
     border-radius: .5rem;
     outline: none;
+    border: none;
     width: 12rem;
     padding: .5rem;
+}
+
+.cartItemDetails button:hover{
+    background-color: rgb(36, 129, 235);;
 }
