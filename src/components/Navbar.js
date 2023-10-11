@@ -1,5 +1,6 @@
 import '../styles/Navbar.css';
 
+import orderIcon from '../assets/images/order.png';
 import cartIcon from '../assets/images/cart.png';
 import homeIcon from '../assets/images/homeIcon.png';
 import signInIcon from '../assets/images/signInIcon.png';
@@ -26,6 +27,12 @@ function Navbar(){
                     </span>
                 </Link>
                 
+                {isLoggedIn && <NavLink to='/order'>
+                    <span>
+                        <img src={orderIcon} alt='order' width='40' height='40' /> Order
+                    </span>
+                </NavLink>}
+
                 {isLoggedIn && <NavLink to='/cart'>
                     <span>
                         <img src={cartIcon} alt='cart' width='40' height='40' /> Cart

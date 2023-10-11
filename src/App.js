@@ -4,6 +4,7 @@ import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
+import Order from './pages/Order';
 
 import CustomAuthContext from './authContext';
 import CustomProductContext from './productContext';
@@ -23,6 +24,10 @@ function App() {
         {
           path: 'signup',
           element: <Signup />
+        },
+        {
+          path: 'order',
+          element: <Order />
         },
         {
           path: 'cart',

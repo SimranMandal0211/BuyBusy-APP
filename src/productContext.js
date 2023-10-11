@@ -27,6 +27,7 @@ export default function CustomProductContext({ children }){
     // user's login status and loggedIn user
     const {isLoggedIn, userLoggedIn, setLoggedIn, setUserLoggedIn} = useAuthValue();
 
+    const [myorders, setMyOrders] = useState([]);
     const [cart, setCart] = useState([]);
     const [itemInCart, setItemInCart] = useState(0);
     const [total, setTotal] = useState(0);
@@ -47,10 +48,11 @@ export default function CustomProductContext({ children }){
         if(isLoggedIn){
             const unsub = onSnapshot(doc(db, 'buybusy', userLoggedIn.id), (doc) => {
                 setCart(doc.data().cart);
+                setMyOrders(doc.data().orders);
             });
 
             let sum = 0;
-            cart.map((item) => Number(sum+= item.price));
+            cart.map((item) => Number(sum += item.price));
             setTotal(sum);
             setItemInCart(cart.length);
         }
@@ -136,6 +138,48 @@ export default function CustomProductContext({ children }){
         });
     }
 
+    // purchase all items in cart
+    async function purchaseAll(){
+        // get current data from function
+        const currentDate = getDate();
+
+        // adding order to database
+        const userRef = doc(db, 'buybusy', userLoggedIn.id);
+        await updateDoc(userRef, {
+            orders: arrayUnion({ date: currentDate, list: cart, amount: total})
+        });
+
+        // empty cart
+        clearCart();
+    }
+
+    // remove all product from cart
+    async function clearCart(){
+        if(itemInCart === 0){
+            toast.error('Nothing to remove in Cart!!');
+            return;
+        }
+
+        const userRef = doc(db, 'buybusy', userLoggedIn.id);
+        await updateDoc(userRef, {
+            cart: []
+        });
+
+        setTotal(0);
+        setItemInCart(0);
+        toast.success('Empty Cart!!');
+    }
+
+
+    // return data in yy/mm//dd format
+    function getDate(){
+        const date = new Date();
+        let day = date.getDate();
+        let month = date.getMonth() + 1;
+        let year = date.getFullYear();
+
+        return (`${year}-${month}-${day}`);
+    }
 
     return(
         <productContext.Provider value={
@@ -145,7 +189,9 @@ export default function CustomProductContext({ children }){
 
              removeFromCart,    //CartItem component
              increaseQty,
-             decreaseQty
+             decreaseQty,
+
+            
             }
         }>
             {children}

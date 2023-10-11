@@ -1,7 +1,29 @@
+/* cart */
+.cartPageBox{
+    border: 2px solid green;
+    display: flex;
+    justify-content: space-around;
+    padding-top: 3rem;
+    height: 100%;
+}
+
+.cartItemsBox{
+    width: 50%;
+    box-shadow: 0px 0px 10px 5px #efefef;
+}
+
+.cartPurchaseSection{
+    border: 2px solid purple;
+    width: 25%;
+    height: fit-content;
+    min-height: 50vh;
+}
+
+/* cart Item */
 .cartItem{
     border: 2px solid rgba(203, 203, 203, 0.57);
     display: flex;
-    width: 65%;
+    /* width: 65%; */
     margin: 1rem;
 }
 
