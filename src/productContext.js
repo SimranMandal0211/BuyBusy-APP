@@ -199,7 +199,7 @@ export default function CustomProductContext({ children }){
              increaseQty,
              decreaseQty,
 
-            
+             myorders,       //order component
             }
         }>
             {children}
