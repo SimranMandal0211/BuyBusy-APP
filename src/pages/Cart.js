@@ -3,8 +3,32 @@ import CartItem from '../components/Cart/CartItem';
 
 import styles from '../styles/cart.module.css';
 
+// for toast notification
+import { toast } from "react-toastify";
+// react router
+import { useNavigate } from 'react-router-dom';
+
+
 export default function Cart(){
-    const {cart} = useProductContext();
+    const {cart, total, itemInCart, purchaseAll} = useProductContext();
+
+    // use in navigate to another page
+    const navigate = useNavigate();
+
+    // purchase button handler
+    function handlePurchase(){
+        // cart empty
+        if(itemInCart === 0){
+            toast.error('Nothing to purchase in Cart!!');
+            return;
+        }
+
+        // define in productContext
+        purchaseAll();
+        toast.success('Your Order has been Placed!!!');
+
+        navigate('/order');
+    }
 
     return(
         <div className={styles.cartPageBox}>
@@ -18,8 +42,20 @@ export default function Cart(){
                 }
             </div>
             <div className={styles.cartPurchaseSection}>
-                <p> Total - Rs. 500</p>
-                <button>Buy Now</button>
+                <h3>PRICE DETAIL</h3>
+                <table className={styles.buyItemList}>
+                    <tbody>
+                        {cart.map((product, i) => (
+                            <tr key={i}>
+                                <td>{product.name}</td>
+                                <td className={styles.productPrice}>Rs. {product.price}</td>
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+
+                <p className={styles.totalAmount}> Total Amount:  Rs.{total}</p>
+                <button onClick={handlePurchase} className={styles.placeOrder}>PLACE ORDER</button>
             </div>
         </div>
     );

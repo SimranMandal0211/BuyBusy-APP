@@ -1,23 +1,67 @@
 /* cart */
 .cartPageBox{
-    border: 2px solid green;
+    /* border: 2px solid green; */
     display: flex;
     justify-content: space-around;
-    padding-top: 3rem;
-    height: 100%;
+    padding-top: 2rem;
+    height: 90%;
+    position: absolute;
+    top: 10%;
+    z-index: -1;
 }
 
 .cartItemsBox{
+    overflow-y: scroll;
+    height: 100%;
     width: 50%;
-    box-shadow: 0px 0px 10px 5px #efefef;
+    box-shadow: 1px 1px 10px 5px #dbdbdb;
+    /* height: fit-content; */
 }
 
 .cartPurchaseSection{
-    border: 2px solid purple;
+    box-shadow: 0px 0px 10px 5px #d3d3d3b0;
     width: 25%;
     height: fit-content;
     min-height: 50vh;
 }
+
+.cartPurchaseSection h3{
+    padding: .5rem;
+    border-bottom: 2px solid rgba(98, 98, 98, 0.1);
+}
+
+table.buyItemList  td{
+    padding: .5rem;
+    width: 70%;
+}
+
+td.productPrice{
+    text-align: center;
+}
+
+.totalAmount{
+    padding: .5rem;
+    border-bottom: 2px solid rgba(98, 98, 98, 0.1);
+    border-top: 2px solid rgba(98, 98, 98, 0.1);
+}
+
+.placeOrder{
+    font-weight: bold;
+    font-size: 1.1rem;
+    color : white;
+    border-radius: .2rem;
+    border: none;
+    outline: none;
+    background-color: rgb(14, 191, 28);
+    padding: .5rem;
+    margin: 1rem;
+    cursor: pointer;
+}
+
+.placeOrder:hover{
+    background-color: rgb(15, 172, 28);
+}
+
 
 /* cart Item */
 .cartItem{

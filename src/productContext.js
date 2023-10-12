@@ -13,6 +13,10 @@ import {db} from './firebaseInit';
 import {doc, updateDoc, onSnapshot, arrayUnion, arrayRemove } from 'firebase/firestore';
 
 
+
+
+
+
 // creating context
 export const productContext = createContext();
 
@@ -28,7 +32,7 @@ export default function CustomProductContext({ children }){
     const {isLoggedIn, userLoggedIn, setLoggedIn, setUserLoggedIn} = useAuthValue();
 
     const [myorders, setMyOrders] = useState([]);
-    const [cart, setCart] = useState([]);
+    const [cart, setCart] = useState([]);   //[price, quantity, name, image, category, id] - fetching this from data.js 
     const [itemInCart, setItemInCart] = useState(0);
     const [total, setTotal] = useState(0);
 
@@ -185,7 +189,11 @@ export default function CustomProductContext({ children }){
         <productContext.Provider value={
             {data,          //MainContent
              addToCart,     //use in ItemCart component
+
              cart,          //Cart component
+             purchaseAll,
+             total,
+             itemInCart,
 
              removeFromCart,    //CartItem component
              increaseQty,

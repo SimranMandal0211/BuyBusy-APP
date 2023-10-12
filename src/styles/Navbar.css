@@ -5,8 +5,12 @@
     align-items: center;
     padding: 1rem 2rem;
     box-shadow: 9px 3px 15px 2px #aeaeae;
-
     color: rgb(14, 101, 201);
+    background: white;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    
 }
 
 .nav-btns{
