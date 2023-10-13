@@ -19,7 +19,7 @@ export default function OrderDetail(props){
                 </thead>
                 <tbody>
                     {list.map((product, i) => 
-                        <tr>
+                        <tr key={i}>
                             <td>{i + 1}</td>
                             <td className={styles.productNameData}>{product.name}</td>
                             <td>{product.price}</td>

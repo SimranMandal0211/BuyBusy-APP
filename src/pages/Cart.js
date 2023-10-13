@@ -48,7 +48,7 @@ export default function Cart(){
                         {cart.map((product, i) => (
                             <tr key={i}>
                                 <td>{product.name}</td>
-                                <td className={styles.productPrice}>Rs. {product.price}</td>
+                                <td className={styles.productPrice}>Rs. {product.price * product.quantity}</td>
                             </tr>
                         ))}
                     </tbody>

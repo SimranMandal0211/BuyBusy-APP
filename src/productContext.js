@@ -51,13 +51,17 @@ export default function CustomProductContext({ children }){
     useEffect(() => {
         if(isLoggedIn){
             const unsub = onSnapshot(doc(db, 'buybusy', userLoggedIn.id), (doc) => {
-                setCart(doc.data().cart);
-                setMyOrders(doc.data().orders);
+                const data = doc.data();
+                if(data){
+                    setCart(data.cart);
+                    setMyOrders(data.orders);
+                    setTotal(data.total);
+                }
             });
 
-            let sum = 0;
-            cart.map((item) => Number(sum += item.price));
-            setTotal(sum);
+            // let sum = 0;
+            // cart.map((item) => Number(sum += item.price));
+            // setTotal(sum);
             setItemInCart(cart.length);
         }
     }, [userLoggedIn]);
@@ -79,12 +83,17 @@ export default function CustomProductContext({ children }){
             return;
         }
 
+        setTotal(Number(total + product.price));
+
         // add product to the cart of loggedIn user
         const userRef = doc(db, 'buybusy', userLoggedIn.id);
         await updateDoc(userRef, {
-            cart: arrayUnion({quantity:1, ...product})
+            cart: arrayUnion({quantity:1, ...product}),
+            total:total + product.price,
         });
-        setTotal(Number(total + product.price));
+
+        console.log('add to cart total',total);
+
         setItemInCart(itemInCart + 1);
         console.log('Item added to cart:: ',itemInCart);
         toast.success("Added to your Cart!!")
@@ -92,13 +101,18 @@ export default function CustomProductContext({ children }){
 
     // remove single product from cart
     async function removeFromCart(product){
+        setTotal(Number(total - (product.quantity * product.price)));
+
         const userRef = doc(db, 'buybusy', userLoggedIn.id);
         await updateDoc(userRef, {
-            cart: arrayRemove(product)
+            cart: arrayRemove(product),
+            total: (total - (product.quantity * product.price)) 
         });
-        setTotal(Number(total - (product.quantity * product.price)));
+
         setItemInCart(itemInCart - product.quantity);
         toast.success('Removed from Cart!!');
+
+        console.log('remove cart total',total);
     }
 
 
@@ -106,22 +120,24 @@ export default function CustomProductContext({ children }){
     async function increaseQty(product){
         const index = cart.findIndex((item) => item.name === product.name);
         cart[index].quantity++;
+        
         setCart(cart);
+        setTotal(Number(total + cart[index].price));
 
         // update cart in firebase databse
         const userRef = doc(db, 'buybusy', userLoggedIn.id);
         await updateDoc(userRef, {
-            cart: cart
+            cart: cart,
+            total: total + product.price
         });
 
         setItemInCart(itemInCart + 1);
-        setTotal(Number(total + cart[index].price));
+        console.log('total in incQty: ', total);
     }
 
     // to decrease item's quantity
     async function decreaseQty(product){
         const index = cart.findIndex((item) => item.name === product.name);
-        setTotal(Number(total - cart[index].price));
 
         // change qty of product and update cart array
         if(cart[index].quantity > 1){
@@ -130,16 +146,21 @@ export default function CustomProductContext({ children }){
             cart.splice(index, 1);
         }
 
+        const newTotal = cart.reduce((total, item) => total+ item.price * item.quantity, 0);
 
         // update cart and item Count
         setCart(cart);
         setItemInCart(itemInCart - 1);
 
+        setTotal(newTotal);
+
         // update cart in array
         const userRef = doc(db, 'buybusy', userLoggedIn.id);
         await updateDoc(userRef, {
-            cart: cart
+            cart: cart,
+            total: newTotal
         });
+        console.log('total in decQty: ', total);
     }
 
     // purchase all items in cart
@@ -166,7 +187,8 @@ export default function CustomProductContext({ children }){
 
         const userRef = doc(db, 'buybusy', userLoggedIn.id);
         await updateDoc(userRef, {
-            cart: []
+            cart: [],
+            total: 0
         });
 
         setTotal(0);
