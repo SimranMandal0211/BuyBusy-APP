@@ -1,10 +1,15 @@
 import { useState } from "react";
 import MainContent from "../components/Home/MainContent";
+import FilterBar from '../components/Home/FilterBar';
 
 import styles from '../styles/home.module.css';
 
 function Home(){
     const [search, setSearch] = useState('');
+    const [price, setPrice] = useState(5000);
+    const [category, setCategory] = useState('none');
+
+
     return(
         <div className={styles.homeContainer}>
             <div className={styles.searchInputBox}>
@@ -13,7 +18,16 @@ function Home(){
                     onChange={(e) => setSearch(e.target.value)}
                 />
             </div>
-            <MainContent search={search} />
+            <div className={styles.filterMainContainer}>
+                <FilterBar price={price}
+                    setPrice={setPrice}
+                    setCategory={setCategory}
+                />
+                <MainContent search={search} 
+                    price={price}
+                    category={category}
+                />
+            </div>
         </div>
     )
 }

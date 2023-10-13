@@ -20,13 +20,48 @@
     box-shadow: 1px 1px 10px 5px #dad9d9ad;
 }
 
+/* filter & main container  */
+.filterMainContainer{
+    /* border: 5px solid purple; */
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+}
+
+/* filter container */
+.filterBarContainer{
+    width: fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    margin: 2.5rem 0 0 2rem;
+    background-color: #d9e0eb7a;
+    padding: 1.5rem;
+    box-shadow: 1px 1px 10px 5px #dedede;
+    font-size: 1.1rem;
+    color: navy;
+}
+
+.filterBarContainer h2{
+    color: #05058e;
+}
+
+.p5{
+    padding: .5rem;
+}
+
+.filterBarContainer label{
+    padding: 0 .5rem;
+}
+
 /* Main container */
 .itemContainer{
     /* border: 2px solid green; */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    height: 100%;
+    overflow-y: scroll;
+    height: 75vh;
+    width: 85%;
     /* position: absolute;
     top: 10%;
     z-index: -1; */
@@ -36,7 +71,7 @@
 .cardContainer{
     box-shadow: 1px 2px 10px 5px #c8c5c5;
     border-radius: .3rem;
-    width: 18%;
+    width: 25%;
     /* height: 28rem; */
     margin: 2rem;
     padding: 1.5rem 1rem;
