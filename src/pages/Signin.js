@@ -18,10 +18,10 @@ function Signin(){
             email: emailRef.current.value,
             password: passwordref.current.value
         }
-        console.log('input signIn data: ', data);
+        console.log('input signIn ');
         // sign in user
         const status = await signIn(data);
-        { status ? navigate('/') : navigate('/signin') };
+        status ? navigate('/') : navigate('/signin'); 
     }
 
     return(

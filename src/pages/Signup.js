@@ -29,7 +29,7 @@ function Signup(){
             password:passwordRef.current.value
         }
 
-        console.log('signUp data', data);
+        console.log('signUp done');
         // creating user
         createUser(data);
         // if user created redirect to corresponding page

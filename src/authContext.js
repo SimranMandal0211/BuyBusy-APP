@@ -62,6 +62,7 @@ function CustomAuthContext({children}){
             orders: [],
             total:0,
         });
+        console.log('docRef',docRef);
         toast.success("New user Created, Please LogIn to Continue !!");
     }
 

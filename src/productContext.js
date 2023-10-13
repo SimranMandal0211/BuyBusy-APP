@@ -45,7 +45,7 @@ export default function CustomProductContext({ children }){
             setLoggedIn(token);
             setUserLoggedIn(user);
         }
-    });
+    }, [setLoggedIn, setUserLoggedIn]);
 
     // getting real time update of user's cart 
     useEffect(() => {

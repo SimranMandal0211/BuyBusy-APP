@@ -27,7 +27,7 @@ export default function FilterBar(props){
                         name='category'
                         onChange={() => setCategory('men')}
                     />
-                    <label for='men'>Men</label>
+                    <label htmlFor='men'>Men</label>
                     <br />
 
                     {/* women */}
@@ -37,7 +37,7 @@ export default function FilterBar(props){
                         name='category'
                         onChange={() => setCategory('women')}
                     />
-                    <label for='women'>Women</label>
+                    <label htmlFor='women'>Women</label>
                     <br />
 
                     {/* electronic */}
@@ -47,7 +47,7 @@ export default function FilterBar(props){
                         name='category'
                         onChange={() => setCategory('electric')}
                     />
-                    <label for='electric'>Electronic</label>
+                    <label htmlFor='electric'>Electronic</label>
                     <br />
 
                     {/* jewellery */}
@@ -57,7 +57,7 @@ export default function FilterBar(props){
                         name='category'
                         onChange={() => setCategory('jewellery')}
                     />
-                    <label for='jewellery'>Jewellery</label>
+                    <label htmlFor='jewellery'>Jewellery</label>
                     <br />
                     
                     {/* none */}
@@ -67,7 +67,7 @@ export default function FilterBar(props){
                         name='category'
                         onChange={() => setCategory('none')}
                     />
-                    <label for='none'>None</label>
+                    <label htmlFor='none'>None</label>
                 </div>
             </div>
         </div>

@@ -11,9 +11,9 @@ export default function Loader(){
             marginTop: '15%',
             zIndex: '999'
         }}>
-            <Spinner radius={80}
+            <Spinner radius={60}
                 color={'blue'}
-                stroke={2}
+                stroke={10}
                 visible={true}
             />
             <h4>Loading..</h4>
