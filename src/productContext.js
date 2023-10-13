@@ -45,7 +45,7 @@ export default function CustomProductContext({ children }){
             setLoggedIn(token);
             setUserLoggedIn(user);
         }
-    }, []);
+    });
 
     // getting real time update of user's cart 
     useEffect(() => {
@@ -58,13 +58,13 @@ export default function CustomProductContext({ children }){
                     setTotal(data.total);
                 }
             });
-
+            console.log('product context:', unsub);
             // let sum = 0;
             // cart.map((item) => Number(sum += item.price));
             // setTotal(sum);
             setItemInCart(cart.length);
         }
-    }, [userLoggedIn]);
+    },[userLoggedIn, cart.length, isLoggedIn]);
 
     
     // function to add product to cart

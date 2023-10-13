@@ -5,6 +5,7 @@ import Signup from './pages/Signup';
 import Home from './pages/Home';
 import Cart from './pages/Cart';
 import Order from './pages/Order';
+import Error from './pages/Error';
 
 import CustomAuthContext from './authContext';
 import CustomProductContext from './productContext';
@@ -16,6 +17,7 @@ function App() {
     {
       path: '/',
       element: <Navbar />,
+      errorElement: <Error />,
       children: [
         {index: true, element: <Home />},
         { path: 'signin',
