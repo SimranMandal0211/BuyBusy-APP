@@ -2,6 +2,37 @@
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## Pages
+  - Sign In
+  - Sign Up
+  - Home
+  - Cart
+  - Order
+
+## File Structure
+  - App.js
+    ### `Common in all pages`
+      - Nav
+      - Error
+      - Home
+    ### `More Pages`
+    
+    - Home
+      - Loader
+      - MainContent
+        - ItemCard
+      - FilterBar
+    - Order
+      - Loader
+      - OrderDetail
+    - Cart
+      - Loader
+      - CartIem
+
+    ### `AuthContex and ProductContext`
+
+
+
 ## Available Scripts
 
 In the project directory, you can run:
